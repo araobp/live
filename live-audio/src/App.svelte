@@ -17,7 +17,7 @@
   let nextStartTime = 0;
   let mediaStream;
   let sourceNode;
-  let scriptProcessorNode;
+  let audioWorkletNode;
   let sources = new Set();
 
   onMount(() => {
@@ -138,24 +138,17 @@
       sourceNode = inputAudioContext.createMediaStreamSource(mediaStream);
       sourceNode.connect(inputNode);
 
-      const bufferSize = 256;
-      scriptProcessorNode = inputAudioContext.createScriptProcessor(
-        bufferSize,
-        1,
-        1,
-      );
+      await inputAudioContext.audioWorklet.addModule('audio-processor.js');
+      audioWorkletNode = new AudioWorkletNode(inputAudioContext, 'audio-processor');
 
-      scriptProcessorNode.onaudioprocess = (audioProcessingEvent) => {
+      audioWorkletNode.port.onmessage = (event) => {
         if (!isRecording) return;
-
-        const inputBuffer = audioProcessingEvent.inputBuffer;
-        const pcmData = inputBuffer.getChannelData(0);
-
+        const pcmData = event.data;
         session.sendRealtimeInput({ media: createBlob(pcmData) });
       };
 
-      sourceNode.connect(scriptProcessorNode);
-      scriptProcessorNode.connect(inputAudioContext.destination);
+      sourceNode.connect(audioWorkletNode);
+      audioWorkletNode.connect(inputAudioContext.destination);
 
       isRecording = true;
       updateStatus('🔴 Recording... Capturing PCM chunks.');
@@ -173,12 +166,12 @@
 
     isRecording = false;
 
-    if (scriptProcessorNode && sourceNode && inputAudioContext) {
-      scriptProcessorNode.disconnect();
+    if (audioWorkletNode && sourceNode && inputAudioContext) {
+      audioWorkletNode.disconnect();
       sourceNode.disconnect();
     }
 
-    scriptProcessorNode = null;
+    audioWorkletNode = null;
     sourceNode = null;
 
     if (mediaStream) {
