@@ -4,21 +4,21 @@
   import { createBlob, decode, decodeAudioData } from './utils';
   import Visual3d from './Visual3d.svelte';
 
-  let isRecording = false;
-  let status = '';
-  let error = '';
+  var isRecording = false;
+  var status = '';
+  var error = '';
 
-  let client;
-  let session;
-  let inputAudioContext;
-  let outputAudioContext;
-  let inputNode;
-  let outputNode;
-  let nextStartTime = 0;
-  let mediaStream;
-  let sourceNode;
-  let audioWorkletNode;
-  let sources = new Set();
+  var client;
+  var session;
+  var inputAudioContext;
+  var outputAudioContext;
+  var inputNode;
+  var outputNode;
+  var nextStartTime = 0;
+  var mediaStream;
+  var sourceNode;
+  var audioWorkletNode;
+  var sources = new Set();
 
   onMount(() => {
     inputAudioContext = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 16000 });
@@ -28,11 +28,11 @@
     initClient();
   });
 
-  function initAudio() {
+  const initAudio = () => {
     nextStartTime = outputAudioContext.currentTime;
-  }
+  };
 
-  async function initClient() {
+  const initClient = async () => {
     initAudio();
 
     client = new GoogleGenAI({
@@ -44,7 +44,7 @@
     initSession();
   }
 
-  async function initSession() {
+  const initSession = async () => {
     const model = 'gemini-2.5-flash-preview-native-audio-dialog';
 
     try {
@@ -110,15 +110,15 @@
     }
   }
 
-  function updateStatus(msg) {
+  const updateStatus = (msg) => {
     status = msg;
-  }
+  };
 
-  function updateError(msg) {
+  const updateError = (msg) => {
     error = msg;
-  }
+  };
 
-  async function startRecording() {
+  const startRecording = async () => {
     if (isRecording) {
       return;
     }
@@ -159,7 +159,7 @@
     }
   }
 
-  function stopRecording() {
+  const stopRecording = () => {
     if (!isRecording && !mediaStream && !inputAudioContext) return;
 
     updateStatus('Stopping recording...');
@@ -182,7 +182,7 @@
     updateStatus('Recording stopped. Click Start to begin again.');
   }
 
-  function reset() {
+  const reset = () => {
     session?.close();
     initSession();
     updateStatus('Session cleared.');

@@ -11,18 +11,18 @@
   import { fs as backdropFS, vs as backdropVS } from './backdrop-shader';
   import { vs as sphereVS } from './sphere-shader';
 
-  export let inputNode;
-  export let outputNode;
+  export var inputNode;
+  export var outputNode;
 
-  let canvas;
-  let inputAnalyser;
-  let outputAnalyser;
-  let camera;
-  let backdrop;
-  let composer;
-  let sphere;
-  let prevTime = 0;
-  let rotation = new THREE.Vector3(0, 0, 0);
+  var canvas;
+  var inputAnalyser;
+  var outputAnalyser;
+  var camera;
+  var backdrop;
+  var composer;
+  var sphere;
+  var prevTime = 0;
+  var rotation = new THREE.Vector3(0, 0, 0);
 
   onMount(() => init());
 
@@ -33,7 +33,7 @@
     outputAnalyser = new Analyser(outputNode);
   }
 
-  function init() {
+  const init = () => {
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x100c14);
 
@@ -117,7 +117,7 @@
     // composer.addPass(fxaaPass);
     composer.addPass(bloomPass);
 
-    function onWindowResize() {
+    const onWindowResize = () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       const dPR = renderer.getPixelRatio();
@@ -138,7 +138,7 @@
     animation();
   }
 
-  function animation() {
+  const animation = () => {
     requestAnimationFrame(animation);
 
     if (!inputAnalyser || !outputAnalyser) {
