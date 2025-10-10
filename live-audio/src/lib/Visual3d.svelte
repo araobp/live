@@ -1,6 +1,6 @@
 <script>
   import { onMount } from 'svelte';
-  import { Analyser } from './analyser';
+  import { Analyser } from '$lib/analyser';
   import * as THREE from 'three';
   import { EXRLoader } from 'three/addons/loaders/EXRLoader.js';
   import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
@@ -8,8 +8,8 @@
   import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
   import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
   import { FXAAShader } from 'three/addons/shaders/FXAAShader.js';
-  import { fs as backdropFS, vs as backdropVS } from './backdrop-shader';
-  import { vs as sphereVS } from './sphere-shader';
+  import { fs as backdropFS, vs as backdropVS } from '$lib/backdrop-shader';
+  import { vs as sphereVS } from '$lib/sphere-shader';
 
   export var inputNode;
   export var outputNode;

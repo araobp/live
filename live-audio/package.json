@@ -4,12 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite dev",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
     "@google/genai": "^1.15.0",
+    "@sveltejs/kit": "^2.46.4",
     "three": "^0.176.0"
   },
   "devDependencies": {

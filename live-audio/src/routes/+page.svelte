@@ -1,8 +1,8 @@
 <script>
   import { onMount } from 'svelte';
   import { GoogleGenAI, LiveServerMessage, Modality, Session } from '@google/genai';
-  import { createBlob, decode, decodeAudioData } from './utils';
-  import Visual3d from './Visual3d.svelte';
+  import { createBlob, decode, decodeAudioData } from '$lib/utils';
+  import Visual3d from '$lib/Visual3d.svelte';
 
   var isRecording = false;
   var status = '';
