@@ -12,7 +12,8 @@ class Analyser {
     this.analyser = node.context.createAnalyser();
     this.analyser.fftSize = 32;
     this.bufferLength = this.analyser.frequencyBinCount;
-    this.dataArray = new Uint8Array(this.bufferLength);
+    const buffer = new ArrayBuffer(this.bufferLength);
+    this.dataArray = new Uint8Array(buffer);
     node.connect(this.analyser);
   }
   update() {

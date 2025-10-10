@@ -132,7 +132,7 @@ import"../chunks/Bzak7iHL.js";import"../chunks/CDKKvNe5.js";import{o as Yu,e as 
 */const yS=n=>{var e="";const t=n.byteLength;for(var i=0;i<t;i++)e+=String.fromCharCode(n[i]);return btoa(e)},MS=n=>{const e=atob(n),t=e.length,i=new Uint8Array(t);for(var o=0;o<t;o++)i[o]=e.charCodeAt(o);return i},ES=n=>{const e=n.length,t=new Int16Array(e);for(var i=0;i<e;i++)t[i]=n[i]*32768;return{data:yS(new Uint8Array(t.buffer)),mimeType:"audio/pcm;rate=16000"}},CS=async(n,e,t,i)=>{const o=e.createBuffer(i,n.length/2/i,t),r=new Int16Array(n.buffer),l=r.length,u=new Float32Array(l);for(var c=0;c<l;c++)u[c]=r[c]/32768;for(var c=0;c<i;c++){const d=u.filter((h,p)=>p%i===c);o.copyToChannel(d,c)}return o};/**
  * @license
  * SPDX-License-Identifier: Apache-2.0
-*/class Co{constructor(e){this.bufferLength=0,this.analyser=e.context.createAnalyser(),this.analyser.fftSize=32,this.bufferLength=this.analyser.frequencyBinCount,this.dataArray=new Uint8Array(this.bufferLength),e.connect(this.analyser)}update(){this.analyser.getByteFrequencyData(this.dataArray)}get data(){return this.dataArray}}/**
+*/class Co{constructor(e){this.bufferLength=0,this.analyser=e.context.createAnalyser(),this.analyser.fftSize=32,this.bufferLength=this.analyser.frequencyBinCount;const t=new ArrayBuffer(this.bufferLength);this.dataArray=new Uint8Array(t),e.connect(this.analyser)}update(){this.analyser.getByteFrequencyData(this.dataArray)}get data(){return this.dataArray}}/**
  * @license
  * Copyright 2010-2025 Three.js Authors
  * SPDX-License-Identifier: MIT
