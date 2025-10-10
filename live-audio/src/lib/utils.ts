@@ -32,7 +32,7 @@ const createBlob = (data: Float32Array): Blob => {
   }
 
   return {
-    data: encode(new Uint8Array(int16.buffer)),
+    data: encode(new Uint8Array(int16.buffer as ArrayBuffer)),
     mimeType: 'audio/pcm;rate=16000',
   };
 }
