@@ -36,6 +36,6 @@ declare module "$app/types" {
 		};
 		Pathname(): "/";
 		ResolvedPathname(): `${"" | `/${string}`}${ReturnType<AppTypes['Pathname']>}`;
-		Asset(): "/audio-processor.js" | "/piz_compressed.exr" | string & {};
+		Asset(): "/audio-processor.js" | "/icon.svg" | "/piz_compressed.exr" | "/pwa-192x192.png" | "/pwa-512x512.png" | string & {};
 	}
 }
