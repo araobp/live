@@ -10,7 +10,8 @@ I used Gemini CLI for the conversion. I will start with this code to explore Gem
 
 ## App
 
-The web app is being developed to run on mobile Chrome browsers. It will feature a QR code reader to determine the user's local context and is intended for use in a corporate showroom. It will also feature Augmented Reality (AR) as a visual guidance system for visitors to the showroom.
+A web app is being developed to run on mobile Chrome browsers. It will feature a QR code reader to determine the user's local context and is intended for use in a corporate showroom. It will also feature Augmented Reality (AR) as a visual guidance system for visitors to the showroom.
+
 
 
 
