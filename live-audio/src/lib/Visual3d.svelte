@@ -1,4 +1,6 @@
 <script>
+  import { run } from 'svelte/legacy';
+
   import { onMount } from 'svelte';
   import { Analyser } from '$lib/analyser';
   import * as THREE from 'three';
@@ -11,12 +13,11 @@
   import { fs as backdropFS, vs as backdropVS } from '$lib/backdrop-shader';
   import { vs as sphereVS } from '$lib/sphere-shader';
 
-  export var inputNode;
-  export var outputNode;
+  let { inputNode, outputNode } = $props();
 
-  var canvas;
-  var inputAnalyser;
-  var outputAnalyser;
+  var canvas = $state();
+  var inputAnalyser = $state();
+  var outputAnalyser = $state();
   var camera;
   var backdrop;
   var composer;
@@ -26,12 +27,16 @@
 
   onMount(() => init());
 
-  $: if (inputNode) {
-    inputAnalyser = new Analyser(inputNode);
-  }
-  $: if (outputNode) {
-    outputAnalyser = new Analyser(outputNode);
-  }
+  run(() => {
+    if (inputNode) {
+      inputAnalyser = new Analyser(inputNode);
+    }
+  });
+  run(() => {
+    if (outputNode) {
+      outputAnalyser = new Analyser(outputNode);
+    }
+  });
 
   const init = () => {
     const scene = new THREE.Scene();

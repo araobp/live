@@ -4,16 +4,16 @@
   import { createBlob, decode, decodeAudioData } from '$lib/utils';
   import Visual3d from '$lib/Visual3d.svelte';
 
-  var isRecording = false;
+  var isRecording = $state(false);
   var status = '';
-  var error = '';
+  var error = $state('');
 
   var client;
   var session;
   var inputAudioContext;
   var outputAudioContext;
-  var inputNode;
-  var outputNode;
+  var inputNode = $state();
+  var outputNode = $state();
   var nextStartTime = 0;
   var mediaStream;
   var sourceNode;
@@ -237,7 +237,7 @@
 
 <div>
   <div class="controls">
-    <button id="resetButton" on:click={reset} disabled={isRecording} aria-label="Reset Session">
+    <button id="resetButton" onclick={reset} disabled={isRecording} aria-label="Reset Session">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         height="40px"
@@ -250,7 +250,7 @@
         />
       </svg>
     </button>
-    <button id="startButton" on:click={startRecording} disabled={isRecording} aria-label="Start Recording">
+    <button id="startButton" onclick={startRecording} disabled={isRecording} aria-label="Start Recording">
       <svg
         viewBox="0 0 100 100"
         width="32px"
@@ -261,7 +261,7 @@
         <circle cx="50" cy="50" r="50" />
       </svg>
     </button>
-    <button id="stopButton" on:click={stopRecording} disabled={!isRecording} aria-label="Stop Recording">
+    <button id="stopButton" onclick={stopRecording} disabled={!isRecording} aria-label="Stop Recording">
       <svg
         viewBox="0 0 100 100"
         width="32px"
