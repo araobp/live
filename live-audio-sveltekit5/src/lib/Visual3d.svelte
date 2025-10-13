@@ -1,6 +1,4 @@
 <script>
-  import { run } from 'svelte/legacy';
-
   import { onMount } from 'svelte';
   import { Analyser } from '$lib/analyser';
   import * as THREE from 'three';
@@ -27,12 +25,12 @@
 
   onMount(() => init());
 
-  run(() => {
+  $effect(() => {
     if (inputNode) {
       inputAnalyser = new Analyser(inputNode);
     }
   });
-  run(() => {
+  $effect(() => {
     if (outputNode) {
       outputAnalyser = new Analyser(outputNode);
     }
