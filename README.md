@@ -27,9 +27,12 @@ sshpass -p "$PASSWORD" scp ./live-audio-sveltekit5/package.json $HOST:/home/arao
 sshpass -p "$PASSWORD" scp ./live-audio-sveltekit5/package-lock.json $HOST:/home/arao/live
 ```
 
+After having copied all the files, you need to run "npm install" in the remote folder.
+
 ## References
 
 - [Web Audio API Tutorial](https://web-audio-api.firebaseapp.com/)
+
 
 
 
