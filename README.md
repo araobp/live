@@ -6,7 +6,7 @@
 
 ## Introduction
 
-This project is an exploration into creating a Unified Communications (UC) application that leverages Generative AI for voice chat over WebSocket. The author, a former IP Telephony engineer who was at the forefront of SIP and Unified Communications 20 years ago, is revisiting the field to build this innovative solution. Notably, the author is also an inventor of a patent for markerless Augmented Reality.
+This project is an exploration into creating a Unified Communications (UC) application that leverages Generative AI for voice chat over WebSocket. The author, a former IP Telephony engineer who was at the forefront of SIP and Unified Communications 20 years ago, is revisiting the field to build this innovative solution. Notably, the author is also an inventor of a [patent for markerless Augmented Reality](https://www.j-platpat.inpit.go.jp/c1801/PU/JP-7743784/15/en).
 
 ## Base Code
 
