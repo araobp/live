@@ -15,15 +15,15 @@
 
   let { inputNode, outputNode } = $props();
 
-  var canvas = $state();
-  var inputAnalyser = $state();
-  var outputAnalyser = $state();
-  var camera;
-  var backdrop;
-  var composer;
-  var sphere;
-  var prevTime = 0;
-  var rotation = new THREE.Vector3(0, 0, 0);
+  let canvas = $state();
+  let inputAnalyser = $state();
+  let outputAnalyser = $state();
+  let camera;
+  let backdrop;
+  let composer;
+  let sphere;
+  let prevTime = 0;
+  let rotation = new THREE.Vector3(0, 0, 0);
 
   onMount(() => init());
 
