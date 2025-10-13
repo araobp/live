@@ -1,40 +1,42 @@
 # Live
 
-(Work in progress)
+**(Work in Progress)**
 
-I used to be a front-running IP Telephony engineer specialized in SIP and Unified Communications including Presence and Chat. After 20 years since then, I have started developing Unified Communications that make voice chat with GenerativeAI over WebSocket! That's fantastic!
+## Introduction
 
-## Base code
+This project is an exploration into creating a Unified Communications (UC) application that leverages Generative AI for voice chat over WebSocket. The author, a former IP Telephony engineer with 20 years of experience in SIP and UC, is revisiting the field to build this innovative solution.
 
-[live-audio-sveltekit5](live-audio-sveltekit5) folder contains SvelteKit-version of [this app](https://aistudio.google.com/apps/bundled/live_audio?showPreview=true&showCode=true&showAssistant=false&_gl=1*1ugdznd*_ga*MjA1MDExODM5My4xNzU2MDE1MzMx*_ga_P1DBVKWT6V*czE3NTk5Mjc1MzYkbzIyJGcxJHQxNzU5OTI4MTEyJGo2MCRsMCRoMTY3NDY2MjA3..) originally written in React.
+## Base Code
 
-I used Gemini CLI for the conversion. I modified part of the code and added comments to make it more readable.
+The `live-audio-sveltekit5` directory contains a SvelteKit version of an application originally written in React. The conversion was performed using the Gemini CLI, with subsequent modifications and comments added for clarity. This codebase serves as the starting point for exploring Gemini Live.
 
-I will start with this code to explore Gemini Live.
+## Application
 
-## App
+The goal is to develop a web application for mobile Chrome browsers, designed for use in a corporate showroom. Key features include:
 
-A web app is being developed to run on mobile Chrome browsers. It will feature a QR code reader to determine the user's local context and is intended for use in a corporate showroom. It will also feature Augmented Reality (AR) as a visual guidance system for visitors to the showroom.
+- A QR code reader to determine the user's local context.
+- Augmented Reality (AR) for visual guidance.
 
-## Copying SvelteKit 5 app on RaspberryPi
+## Deployment on Raspberry Pi
 
-I made this shell script to copy the app to RaspberryPi:
+To deploy the SvelteKit 5 application to a Raspberry Pi, follow these steps:
 
-```
-PASSWORD="******"
-HOST="***@***.***.***.***"
-sshpass -p "$PASSWORD" ssh $HOST "rm -rf ~/live/build/*"
-sshpass -p "$PASSWORD" scp -r ./live-audio-sveltekit5/build $HOST:/home/arao/live
-sshpass -p "$PASSWORD" scp ./live-audio-sveltekit5/package.json $HOST:/home/arao/live
-sshpass -p "$PASSWORD" scp ./live-audio-sveltekit5/package-lock.json $HOST:/home/arao/live
-```
+1.  **Copy the application files:**
+    ```bash
+    PASSWORD="YOUR_PASSWORD"
+    HOST="USER@HOST_IP"
+    sshpass -p "$PASSWORD" ssh $HOST "rm -rf ~/live/build/*"
+    sshpass -p "$PASSWORD" scp -r ./live-audio-sveltekit5/build $HOST:/home/arao/live
+    sshpass -p "$PASSWORD" scp ./live-audio-sveltekit5/package.json $HOST:/home/arao/live
+    sshpass -p "$PASSWORD" scp ./live-audio-sveltekit5/package-lock.json $HOST:/home/arao/live
+    ```
 
-After having copied all the files, you need to run "npm install" in the remote folder.
+2.  **Install dependencies:**
+    After copying the files, SSH into your Raspberry Pi and run `npm install` in the project directory.
 
-You need to modify the chrome flags on Chrome for Android if you run the app with nodejs as a HTTP server:
-```
-chrome://flags/#unsafely-treat-insecure-origin-as-secure
-```
+3.  **Configure Chrome for Android:**
+    If you are running the application with Node.js as an HTTP server, you need to enable the following flag in Chrome for Android:
+    `chrome://flags/#unsafely-treat-insecure-origin-as-secure`
 
 ## References
 
