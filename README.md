@@ -2,13 +2,11 @@
 
 (Work in progress)
 
-<img src="docs/screenshot_pixel9a.jpg" width=200>
-
-SvelteKit5-based Gemini Live app on my Pixel9a
+I used to be a front-running IP Telephony engineer specialized in SIP and Unified Communications including Presence and Chat. After 20 years since then, I have started developing Unified Communications that make voice chat with GenerativeAI over WebSocket! That's fantastic!
 
 ## Base code
 
-[live-audio-sveltekit5](live-audio-sveltekit5) folder contains SvelteKit5-version of [this app](https://aistudio.google.com/apps/bundled/live_audio?showPreview=true&showCode=true&showAssistant=false&_gl=1*1ugdznd*_ga*MjA1MDExODM5My4xNzU2MDE1MzMx*_ga_P1DBVKWT6V*czE3NTk5Mjc1MzYkbzIyJGcxJHQxNzU5OTI4MTEyJGo2MCRsMCRoMTY3NDY2MjA3..) originally written in React.
+[live-audio-sveltekit5](live-audio-sveltekit5) folder contains SvelteKit-version of [this app](https://aistudio.google.com/apps/bundled/live_audio?showPreview=true&showCode=true&showAssistant=false&_gl=1*1ugdznd*_ga*MjA1MDExODM5My4xNzU2MDE1MzMx*_ga_P1DBVKWT6V*czE3NTk5Mjc1MzYkbzIyJGcxJHQxNzU5OTI4MTEyJGo2MCRsMCRoMTY3NDY2MjA3..) originally written in React.
 
 I used Gemini CLI for the conversion. I modified part of the code and added comments to make it more readable.
 
@@ -41,17 +39,3 @@ chrome://flags/#unsafely-treat-insecure-origin-as-secure
 ## References
 
 - [Web Audio API Tutorial](https://web-audio-api.firebaseapp.com/)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
