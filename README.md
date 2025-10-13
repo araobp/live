@@ -43,6 +43,8 @@ To deploy the SvelteKit 5 application to a Raspberry Pi, follow these steps:
 ## References
 
 - [Web Audio API Tutorial](https://web-audio-api.firebaseapp.com/)
+- [WebXR/ARCore](https://developers.google.com/ar/develop/webxr)
+
 
 
 
