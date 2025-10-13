@@ -1,6 +1,8 @@
-# Live
+# Unified Communications with Gemini Live
 
 **(Work in Progress)**
+
+<img src="docs/screenshot_pixel9a.jpg" width=200>
 
 ## Introduction
 
@@ -41,3 +43,6 @@ To deploy the SvelteKit 5 application to a Raspberry Pi, follow these steps:
 ## References
 
 - [Web Audio API Tutorial](https://web-audio-api.firebaseapp.com/)
+
+
+
