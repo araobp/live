@@ -4,7 +4,7 @@
 
 ## Introduction
 
-This project is an exploration into creating a Unified Communications (UC) application that leverages Generative AI for voice chat over WebSocket. The author, a former IP Telephony engineer with 20 years of experience in SIP and UC, is revisiting the field to build this innovative solution.
+This project is an exploration into creating a Unified Communications (UC) application that leverages Generative AI for voice chat over WebSocket. The author, a former IP Telephony engineer who was at the forefront of SIP and Unified Communications 20 years ago, is revisiting the field to build this innovative solution.
 
 ## Base Code
 
