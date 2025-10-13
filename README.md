@@ -2,7 +2,7 @@
 
 (Work in progress)
 
-<img src="docs/screenshot_pixel9a.jpg" width=160>
+<img src="docs/screenshot_pixel9a.jpg" width=180>
 
 SvelteKit5-based Gemini Live app on my Pixel9a
 
@@ -41,6 +41,7 @@ chrome://flags/#unsafely-treat-insecure-origin-as-secure
 ## References
 
 - [Web Audio API Tutorial](https://web-audio-api.firebaseapp.com/)
+
 
 
 
