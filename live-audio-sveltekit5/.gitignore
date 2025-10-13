@@ -7,12 +7,20 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies
 node_modules
-dist
-dist-ssr
-*.local
 
-# Editor directories and files
+# SvelteKit
+.svelte-kit/
+build/
+.output/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# IDEs and editors
 .vscode/*
 !.vscode/extensions.json
 .idea
@@ -22,4 +30,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-.svelte-kit/
+
+# Misc
+dist
+dist-ssr
+*.local
+.vercel
