@@ -2,6 +2,8 @@
 
 (Work in progress)
 
+<img src="docs/screenshot_pixel9a.jpg" width=160>
+
 ## Base code
 
 [live-audio-sveltekit5](live-audio-sveltekit5) folder contains SvelteKit-version of [this app](https://aistudio.google.com/apps/bundled/live_audio?showPreview=true&showCode=true&showAssistant=false&_gl=1*1ugdznd*_ga*MjA1MDExODM5My4xNzU2MDE1MzMx*_ga_P1DBVKWT6V*czE3NTk5Mjc1MzYkbzIyJGcxJHQxNzU5OTI4MTEyJGo2MCRsMCRoMTY3NDY2MjA3..) originally written in React.
@@ -37,6 +39,7 @@ chrome://flags/#unsafely-treat-insecure-origin-as-secure
 ## References
 
 - [Web Audio API Tutorial](https://web-audio-api.firebaseapp.com/)
+
 
 
 
