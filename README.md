@@ -6,20 +6,28 @@
 
 ## Introduction
 
-This project is a web application designed for corporate showrooms, leveraging the Gemini Live API to create an interactive and informative user experience. It uses a QR code reader to understand the user's context and aims to incorporate Augmented Reality (AR) for visual guidance.
+This project is a web application for corporate showrooms that uses the Gemini Live API to create an interactive and informative user experience. It features a QR code reader to understand the user's context and will incorporate Augmented Reality (AR) for visual guidance.
 
 ## Base Code: `live-audio-sveltekit5`
 
-The `live-audio-sveltekit5` directory contains a SvelteKit version of the official Google AI Studio "Live Audio" sample application, which was originally written in React. The conversion was performed using the Gemini CLI, and the code has been further modified and commented for clarity. This codebase serves as the foundation for the project.
+The `live-audio-sveltekit5` directory contains a SvelteKit version of the official Google AI Studio "Live Audio" sample application, which was originally written in React. The Gemini CLI performed the conversion, and the code has been further modified and commented on for clarity. This codebase serves as the project's foundation.
 
 ## Application: `app`
 
 The `app` directory contains the main application, which is being developed with the following key features:
 
--   **QR Code Reader:** To determine the user's location and provide contextual information.
--   **Augmented Reality (AR):** For visual guidance and interactive experiences.
+-   **QR Code Reader:** Determines the user's location and provides contextual information.
+-   **Augmented Reality (AR):** Provides visual guidance and interactive experiences.
 
 <img src="docs/screenshot_qr_pixel9a.jpg" width="200">
+
+### Current Status
+
+- Scans a QR code as an HTTPS URL and sends a system instruction to Gemini with the URL.
+
+### Next Steps
+
+- Scan a QR code as a file ID and upload the corresponding file to Gemini as a Cached Context.
 
 ## Deployment on Raspberry Pi
 
@@ -33,7 +41,7 @@ The application is designed to be deployed on a Raspberry Pi, which acts as a lo
 To deploy the SvelteKit 5 application to a Raspberry Pi, follow these steps:
 
 1.  **Build and Transfer:**
-    Use the following shell script to automate the build process and transfer the application to your Raspberry Pi.
+    Use the following shell script to automate the build and transfer of the application to your Raspberry Pi.
 
     ```bash
     PASSWORD="******"
