@@ -69,8 +69,9 @@
             })
 
             let flower;
-            loader.load("https://immersive-web.github.io/webxr-samples/media/gltf/sunflower/sunflower.gltf", function (gltf) {
-                flower = gltf.scene;
+            loader.load("Anchor.glb", function (glb) {
+//            loader.load("https://immersive-web.github.io/webxr-samples/media/gltf/sunflower/sunflower.gltf", function (gltf) {
+                flower = glb.scene;
             });
 
             session.addEventListener("select", (event) => {

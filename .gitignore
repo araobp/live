@@ -1,1 +1,8 @@
+# SvelteKit
+.svelte-kit
+build
+node_modules
+
+# General
+.DS_Store
 deploy.sh
