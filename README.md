@@ -1,35 +1,40 @@
-# Gemini Live web app for showrooms
+# Gemini Live Showroom Web App
 
 **(Work in Progress)**
 
-<img src="docs/screenshot_pixel9a.jpg" width=200>
+<img src="docs/screenshot_pixel9a.jpg" width="200">
 
 ## Introduction
 
-## Base Code: "live-audio-sveltekit5" folder
+This project is a web application designed for corporate showrooms, leveraging the Gemini Live API to create an interactive and informative user experience. It uses a QR code reader to understand the user's context and aims to incorporate Augmented Reality (AR) for visual guidance.
 
-The `live-audio-sveltekit5` folder contains a SvelteKit version of [this app](https://aistudio.google.com/apps/bundled/live_audio?showPreview=true&showCode=true&showAssistant=false&_gl=1*1ugdznd*_ga*MjA1MDExODM5My4xNzU2MDE1MzMx*_ga_P1DBVKWT6V*czE3NTk5Mjc1MzYkbzIyJGcxJHQxNzU5OTI4MTEyJGo2MCRsMCRoMTY3NDY2MjA3..) originally written in React. The conversion was performed using the Gemini CLI, with subsequent modifications and comments added for clarity. This codebase serves as the starting point for exploring Gemini Live.
+## Base Code: `live-audio-sveltekit5`
 
-## Application: "app" folder
+The `live-audio-sveltekit5` directory contains a SvelteKit version of the official Google AI Studio "Live Audio" sample application, which was originally written in React. The conversion was performed using the Gemini CLI, and the code has been further modified and commented for clarity. This codebase serves as the foundation for the project.
 
-The goal is to develop a web application for mobile Chrome browsers, designed for use in a corporate showroom. Key features include:
+## Application: `app`
 
-- A QR code reader to determine the user's local context.
-- Augmented Reality (AR) for visual guidance.
+The `app` directory contains the main application, which is being developed with the following key features:
 
-<img src="docs/screenshot_qr_pixel9a.jpg" width=200>
+-   **QR Code Reader:** To determine the user's location and provide contextual information.
+-   **Augmented Reality (AR):** For visual guidance and interactive experiences.
+
+<img src="docs/screenshot_qr_pixel9a.jpg" width="200">
 
 ## Deployment on Raspberry Pi
 
+The application is designed to be deployed on a Raspberry Pi, which acts as a local server.
+
 ```
-                                 nodejs
+                                 Node.js
 [Development PC]---- SCP --->[Raspberry Pi]<--- HTTP --->[Browser on Smartphone]
 ```
 
 To deploy the SvelteKit 5 application to a Raspberry Pi, follow these steps:
 
-1.  **Copy the application files:**
-   Create a shell script like this for automating building and copying the app from the local folder to the remote folder:
+1.  **Build and Transfer:**
+    Use the following shell script to automate the build process and transfer the application to your Raspberry Pi.
+
     ```bash
     PASSWORD="******"
     HOST="arao@xxx.xxx.xxx.xxx"
@@ -37,11 +42,11 @@ To deploy the SvelteKit 5 application to a Raspberry Pi, follow these steps:
     REMOTE_DIR="/home/arao/live"
 
     cd $LOCAL_DIR
-    echo ">>> App directory: "`pwd`
-    
+    echo ">>> App directory: $(pwd)"
+
     echo ">>> Building the app..."
     npm run build
-    
+
     echo ">>> Copying the app to the server..."
     sshpass -p "$PASSWORD" ssh $HOST "rm -rf ~/live/build/*"
     sshpass -p "$PASSWORD" scp -r $LOCAL_DIR/build $HOST:$REMOTE_DIR
@@ -49,27 +54,15 @@ To deploy the SvelteKit 5 application to a Raspberry Pi, follow these steps:
     sshpass -p "$PASSWORD" scp $LOCAL_DIR/package-lock.json $HOST:$REMOTE_DIR
     ```
 
-3.  **Install dependencies:**
-    After copying the files, SSH into your Raspberry Pi and run `npm install` in the project directory.
+2.  **Install Dependencies:**
+    SSH into your Raspberry Pi and run `npm install` in the project directory to install the required dependencies.
 
-4.  **Configure Chrome for Android:**
-    If you are running the application with Node.js as an HTTP server, you need to enable the following flag in Chrome for Android:
+3.  **Configure Chrome for Android:**
+    If you are serving the application over HTTP, you need to enable the following flag in Chrome on your Android device to allow microphone access:
     `chrome://flags/#unsafely-treat-insecure-origin-as-secure`
 
 ## References
 
-- [Web Audio API Tutorial](https://web-audio-api.firebaseapp.com/)
-- [jsQRを使ってブラウザQRコードリーダーを作る](https://qiita.com/U_sagi/items/12cc39487a863e0136a0)
-- [WebXR/ARCore](https://developers.google.com/ar/develop/webxr)
-
-
-
-
-
-
-
-
-
-
-
-
+-   [Web Audio API Tutorial](https://web-audio-api.firebaseapp.com/)
+-   [Creating a QR Code Reader in the Browser with jsQR (Japanese)](https://qiita.com/U_sagi/items/12cc39487a863e0136a0)
+-   [WebXR/ARCore](https://developers.google.com/ar/develop/webxr)
