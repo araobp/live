@@ -17,6 +17,8 @@ The goal is to develop a web application for mobile Chrome browsers, designed fo
 - A QR code reader to determine the user's local context.
 - Augmented Reality (AR) for visual guidance.
 
+<img src="docs/screenshot_qr_pixel9a.jpg" width=200>
+
 ## Deployment on Raspberry Pi
 
 ```
@@ -57,7 +59,10 @@ To deploy the SvelteKit 5 application to a Raspberry Pi, follow these steps:
 ## References
 
 - [Web Audio API Tutorial](https://web-audio-api.firebaseapp.com/)
+- [jsQRを使ってブラウザQRコードリーダーを作る](https://qiita.com/U_sagi/items/12cc39487a863e0136a0)
 - [WebXR/ARCore](https://developers.google.com/ar/develop/webxr)
+
+
 
 
 
