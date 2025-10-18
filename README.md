@@ -1,4 +1,4 @@
-# Gemini Live web app
+# Gemini Live web app for showrooms
 
 **(Work in Progress)**
 
@@ -58,6 +58,7 @@ To deploy the SvelteKit 5 application to a Raspberry Pi, follow these steps:
 
 - [Web Audio API Tutorial](https://web-audio-api.firebaseapp.com/)
 - [WebXR/ARCore](https://developers.google.com/ar/develop/webxr)
+
 
 
 
