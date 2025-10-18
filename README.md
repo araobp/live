@@ -6,11 +6,11 @@
 
 ## Introduction
 
-## Base Code
+## Base Code: "live-audio-sveltekit5" folder
 
-The `live-audio-sveltekit5` directory contains a SvelteKit version of [this app](https://aistudio.google.com/apps/bundled/live_audio?showPreview=true&showCode=true&showAssistant=false&_gl=1*1ugdznd*_ga*MjA1MDExODM5My4xNzU2MDE1MzMx*_ga_P1DBVKWT6V*czE3NTk5Mjc1MzYkbzIyJGcxJHQxNzU5OTI4MTEyJGo2MCRsMCRoMTY3NDY2MjA3..) originally written in React. The conversion was performed using the Gemini CLI, with subsequent modifications and comments added for clarity. This codebase serves as the starting point for exploring Gemini Live.
+The `live-audio-sveltekit5` folder contains a SvelteKit version of [this app](https://aistudio.google.com/apps/bundled/live_audio?showPreview=true&showCode=true&showAssistant=false&_gl=1*1ugdznd*_ga*MjA1MDExODM5My4xNzU2MDE1MzMx*_ga_P1DBVKWT6V*czE3NTk5Mjc1MzYkbzIyJGcxJHQxNzU5OTI4MTEyJGo2MCRsMCRoMTY3NDY2MjA3..) originally written in React. The conversion was performed using the Gemini CLI, with subsequent modifications and comments added for clarity. This codebase serves as the starting point for exploring Gemini Live.
 
-## Application
+## Application: "app" folder
 
 The goal is to develop a web application for mobile Chrome browsers, designed for use in a corporate showroom. Key features include:
 
@@ -18,6 +18,11 @@ The goal is to develop a web application for mobile Chrome browsers, designed fo
 - Augmented Reality (AR) for visual guidance.
 
 ## Deployment on Raspberry Pi
+
+```
+                                 nodejs
+[Development PC]---- SCP --->[Raspberry Pi]<--- HTTP --->[Browser on Smartphone]
+```
 
 To deploy the SvelteKit 5 application to a Raspberry Pi, follow these steps:
 
@@ -53,6 +58,7 @@ To deploy the SvelteKit 5 application to a Raspberry Pi, follow these steps:
 
 - [Web Audio API Tutorial](https://web-audio-api.firebaseapp.com/)
 - [WebXR/ARCore](https://developers.google.com/ar/develop/webxr)
+
 
 
 
