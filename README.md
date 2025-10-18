@@ -22,6 +22,7 @@ The goal is to develop a web application for mobile Chrome browsers, designed fo
 To deploy the SvelteKit 5 application to a Raspberry Pi, follow these steps:
 
 1.  **Copy the application files:**
+   Create a shell script like this for automating building and copying the app from the local folder to the remote folder:
     ```bash
     PASSWORD="******"
     HOST="arao@xxx.xxx.xxx.xxx"
@@ -41,10 +42,10 @@ To deploy the SvelteKit 5 application to a Raspberry Pi, follow these steps:
     sshpass -p "$PASSWORD" scp $LOCAL_DIR/package-lock.json $HOST:$REMOTE_DIR
     ```
 
-2.  **Install dependencies:**
+3.  **Install dependencies:**
     After copying the files, SSH into your Raspberry Pi and run `npm install` in the project directory.
 
-3.  **Configure Chrome for Android:**
+4.  **Configure Chrome for Android:**
     If you are running the application with Node.js as an HTTP server, you need to enable the following flag in Chrome for Android:
     `chrome://flags/#unsafely-treat-insecure-origin-as-secure`
 
@@ -52,6 +53,7 @@ To deploy the SvelteKit 5 application to a Raspberry Pi, follow these steps:
 
 - [Web Audio API Tutorial](https://web-audio-api.firebaseapp.com/)
 - [WebXR/ARCore](https://developers.google.com/ar/develop/webxr)
+
 
 
 
