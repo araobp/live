@@ -23,12 +23,22 @@ To deploy the SvelteKit 5 application to a Raspberry Pi, follow these steps:
 
 1.  **Copy the application files:**
     ```bash
-    PASSWORD="YOUR_PASSWORD"
-    HOST="USER@HOST_IP"
+    PASSWORD="******"
+    HOST="arao@xxx.xxx.xxx.xxx"
+    LOCAL_DIR="/Users/shiny/Documents/GitHub/live/app"
+    REMOTE_DIR="/home/arao/live"
+
+    cd $LOCAL_DIR
+    echo ">>> App directory: "`pwd`
+    
+    echo ">>> Building the app..."
+    npm run build
+    
+    echo ">>> Copying the app to the server..."
     sshpass -p "$PASSWORD" ssh $HOST "rm -rf ~/live/build/*"
-    sshpass -p "$PASSWORD" scp -r ./live-audio-sveltekit5/build $HOST:/home/arao/live
-    sshpass -p "$PASSWORD" scp ./live-audio-sveltekit5/package.json $HOST:/home/arao/live
-    sshpass -p "$PASSWORD" scp ./live-audio-sveltekit5/package-lock.json $HOST:/home/arao/live
+    sshpass -p "$PASSWORD" scp -r $LOCAL_DIR/build $HOST:$REMOTE_DIR
+    sshpass -p "$PASSWORD" scp $LOCAL_DIR/package.json $HOST:$REMOTE_DIR
+    sshpass -p "$PASSWORD" scp $LOCAL_DIR/package-lock.json $HOST:$REMOTE_DIR
     ```
 
 2.  **Install dependencies:**
@@ -42,6 +52,7 @@ To deploy the SvelteKit 5 application to a Raspberry Pi, follow these steps:
 
 - [Web Audio API Tutorial](https://web-audio-api.firebaseapp.com/)
 - [WebXR/ARCore](https://developers.google.com/ar/develop/webxr)
+
 
 
 
