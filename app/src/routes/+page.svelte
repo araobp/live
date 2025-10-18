@@ -51,14 +51,8 @@
 
     /**
      * DOM element bindings for the QR code reader feature.
-     * - video: The <video> element that displays the live camera feed.
-     * - canvas: A <canvas> used to capture frames from video for QR code analysis.
-     * - rectCanvas: A <canvas> overlaid on video to draw a rectangle around a detected QR code.
      * - qrCode: A reference to the QrCodeReader component instance.
      */
-    let video = $state();
-    let canvas = $state();
-    let rectCanvas = $state();
     let qrCode = $state(null);
 
     /**
@@ -107,8 +101,11 @@
         nextStartTime = outputAudioContext.currentTime;
 
         // Google Gemini Client
+        const tools = [{ googleSearch: {}, urlContext: {} }];
         client = new GoogleGenAI({
             apiKey: process.env.GEMINI_API_KEY,
+            httpOptions: { apiVersion: "v1alpha" },
+            tools: tools,
         });
 
         // Connect the output gain node to the speakers (final destination),
@@ -127,6 +124,7 @@
     const initSession = async () => {
         // Specifies the Gemini model optimized for real-time, native audio dialogue.
         // This model is designed for fast, conversational interactions.
+        //const model = "gemini-live-2.5-flash-preview"
         const model = "gemini-2.5-flash-native-audio-preview-09-2025";
         //const model = "gemini-2.5-flash-preview-native-audio-dialog";
 
@@ -234,8 +232,12 @@
                         voiceConfig: {
                             prebuiltVoiceConfig: { voiceName: "Leda" },
                         },
-                        // languageCode: 'en-GB'
+                        languageCode: "en-US",
+//                      languageCode: "ja-JP",
                     },
+                    enableAffectiveDialog: true,
+                    //contextWindowCompression: { slidingWindow: {} },
+                    systemInstruction: qrCode? `You are an AI assistant to explain this web site: ${qrCode}.`: `You are an AI assistant.`
                 },
             });
         } catch (e) {
@@ -367,9 +369,10 @@
         updateStatus("Session cleared.");
     };
 
-    $effect(() => {
+    $effect(async () => {
         console.log(qrCode);
-    })
+        reset();
+    });
 </script>
 
 <div style="height: 100vh; margin:0; padding:0;">
@@ -398,9 +401,8 @@
                 isReadingQrCode = !isReadingQrCode;
                 if (isReadingQrCode) {
                     qrCode = null;
-                    }
                 }
-            }
+            }}
             style={isReadingQrCode ? "color: orange" : "color: white"}
             aria-label="Start Reading QR Code"
         >
@@ -464,7 +466,12 @@
         <Visual3d {inputNode} {outputNode} />
     </div>
 
-    <QrCodeReader enabled={isReadingQrCode} updateStatus={updateStatus} bind:qr_code={qrCode} z_index={10}></QrCodeReader>
+    <QrCodeReader
+        enabled={isReadingQrCode}
+        {updateStatus}
+        bind:qr_code={qrCode}
+        z_index={10}
+    ></QrCodeReader>
 </div>
 
 <style>

@@ -27,23 +27,20 @@
 
     /**
      * Draws a rectangle on the canvas to highlight the detected QR code.
+     * This is done by creating a single path connecting the corner points and stroking it.
      * @param {CanvasRenderingContext2D} ctx - The rendering context of the canvas to draw on.
      * @param {object} location - The location object from the jsQR library, containing the corner points of the QR code.
      */
     const drawRect = (ctx, location) => {
-        const drawLine = (ctx, begin, end) => {
-            ctx.lineWidth = 4;
-            ctx.strokeStyle = "blue";
-            ctx.beginPath();
-            ctx.moveTo(begin.x, begin.y);
-            ctx.lineTo(end.x, end.y);
-            ctx.stroke();
-        };
-
-        drawLine(ctx, location.topLeftCorner, location.topRightCorner);
-        drawLine(ctx, location.topRightCorner, location.bottomRightCorner);
-        drawLine(ctx, location.bottomRightCorner, location.bottomLeftCorner);
-        drawLine(ctx, location.bottomLeftCorner, location.topLeftCorner);
+        ctx.beginPath();
+        ctx.moveTo(location.topLeftCorner.x, location.topLeftCorner.y);
+        ctx.lineTo(location.topRightCorner.x, location.topRightCorner.y);
+        ctx.lineTo(location.bottomRightCorner.x, location.bottomRightCorner.y);
+        ctx.lineTo(location.bottomLeftCorner.x, location.bottomLeftCorner.y);
+        ctx.closePath();
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = "blue";
+        ctx.stroke();
     };
 
     /**
@@ -107,11 +104,12 @@
                     /**
                      * A recursive function that continuously scans for QR codes.
                      * It draws the current video frame to a canvas, gets the image data,
-                     * and uses the jsQR library to detect a code. If a code is found,
-                     * it's highlighted and its data is stored. The function then schedules
-                     * itself to run again after a short delay.
+                     * and uses the jsQR library to detect a code. If a code is found, it's
+                     * highlighted and its data is stored. The function then uses
+                     * `requestAnimationFrame` to schedule the next scan, synchronizing it
+                     * with the browser's rendering cycle for optimal performance.
                      */
-                    const checkImage = () => {
+                    const scanFrame = () => {
                         
                         // Draw the current video frame onto the off-screen canvas and then
                         // extract its raw pixel data. This data is what the jsQR library
@@ -144,16 +142,13 @@
                             qr_code = code.data;
                         }
 
-                        // Schedule the next frame check. If the reader is still enabled,
-                        // recursively call `checkImage` after a 500ms delay to create
-                        // a continuous scanning loop.
-                        setTimeout(() => {
-                            if (enabled) {
-                                checkImage();
-                            }
-                        }, 500);
+                        // If the reader is still enabled, schedule the next frame scan.
+                        if (enabled) {
+                            requestAnimationFrame(scanFrame);
+                        }
                     };
-                    checkImage();
+                    // Start the scanning loop.
+                    scanFrame();
                 };
             } catch (e) {
                 console.error(e);
