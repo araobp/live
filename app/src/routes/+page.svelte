@@ -4,6 +4,7 @@
     import { createBlob, decode, decodeAudioData } from "$lib/utils";
     import Visual3d from "$lib/Visual3d.svelte";
     import QrCodeReader from "../lib/QrCodeReader.svelte";
+    import {gutenberg} from "$lib/scripts.ts"
 
     /**
      * Reactive state variables for managing the component's UI.
@@ -104,12 +105,9 @@
         nextStartTime = outputAudioContext.currentTime;
 
         // Google Gemini Client
-        const tools = [{ googleSearch: {}, urlContext: {} }];
-        //const tools = [{ urlContext: {} }];
         client = new GoogleGenAI({
             apiKey: process.env.GEMINI_API_KEY,
             httpOptions: { apiVersion: "v1alpha" },
-            tools: tools,
         });
 
         // Connect the output gain node to the speakers (final destination),
@@ -128,8 +126,8 @@
     const initSession = async () => {
         // Specifies the Gemini model optimized for real-time, native audio dialogue.
         // This model is designed for fast, conversational interactions.
-        //const model = "gemini-live-2.5-flash-preview"
-        const model = "gemini-2.5-flash-native-audio-preview-09-2025";
+        const model = "gemini-live-2.5-flash-preview"
+        //const model = "gemini-2.5-flash-native-audio-preview-09-2025";
         //const model = "gemini-2.5-flash-preview-native-audio-dialog";
 
         // Establish a real-time, bidirectional connection to the Gemini model,
@@ -239,9 +237,9 @@
                         languageCode: "en-US",
                         //                      languageCode: "ja-JP",
                     },
-                    enableAffectiveDialog: true,
-                    //contextWindowCompression: { slidingWindow: {} },
-                    systemInstruction: "You are a guide for a corporate showroom. When an URL of a specific web site is provided, you speak as a member of the company to the visitors."
+//                  enableAffectiveDialog: true,
+                    systemInstruction:
+                        "You are a guide for a corporate showroom.",
                 },
             });
         } catch (e) {
@@ -382,9 +380,8 @@
      * It instructs the model to clear its previous memory and act as a guide
      * for the website URL provided by the scanned QR code.
      */
-    const updateContext = async () => {
-        const contextMessage = `Please completely clear the previous context and, from now on, handle customer service regarding the content of this website: ${qrCode}`;
-
+    const updateContext = async script => {
+        const contextMessage = `In the showroom, the visitor is seeting a panel on this script: ${script}`;
         // Send the URL as context
         await session?.sendClientContent({
             turns: {
@@ -404,10 +401,13 @@
      */
     $effect(async () => {
         if (qrCode === null || prevQrCode === qrCode) return;
+        if (!(qrCode in gutenberg)) return;
+        
         console.log(`Update context with this QR Code: ${qrCode}`);
-        await updateContext();
+        await updateContext(gutenberg[qrCode]);
         prevQrCode = qrCode;
     });
+
 </script>
 
 <div style="height: 100vh; margin:0; padding:0;">
