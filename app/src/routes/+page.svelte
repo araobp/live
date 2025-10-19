@@ -50,10 +50,13 @@
     let audioStream;
 
     /**
-     * DOM element bindings for the QR code reader feature.
-     * - qrCode: A reference to the QrCodeReader component instance.
+     * State variables for managing the QR code data.
+     * - qrCode: Holds the most recently scanned QR code data, bound from the QrCodeReader component.
+     * - prevQrCode: Stores the previously processed QR code to prevent redundant context updates
+     *   if the same code is scanned multiple times.
      */
     let qrCode = $state(null);
+    let prevQrCode = null;
 
     /**
      * Represents the audio source node created from the microphone's media stream.
@@ -102,6 +105,7 @@
 
         // Google Gemini Client
         const tools = [{ googleSearch: {}, urlContext: {} }];
+        //const tools = [{ urlContext: {} }];
         client = new GoogleGenAI({
             apiKey: process.env.GEMINI_API_KEY,
             httpOptions: { apiVersion: "v1alpha" },
@@ -233,11 +237,11 @@
                             prebuiltVoiceConfig: { voiceName: "Leda" },
                         },
                         languageCode: "en-US",
-//                      languageCode: "ja-JP",
+                        //                      languageCode: "ja-JP",
                     },
                     enableAffectiveDialog: true,
                     //contextWindowCompression: { slidingWindow: {} },
-                    systemInstruction: qrCode? `You are an AI assistant to explain this web site: ${qrCode}.`: `You are an AI assistant.`
+                    systemInstruction: "You are a guide for a corporate showroom. When an URL of a specific web site is provided, you speak as a member of the company to the visitors."
                 },
             });
         } catch (e) {
@@ -363,15 +367,46 @@
         updateStatus("Recording stopped. Click Start to begin again.");
     };
 
+    /**
+     * Resets the conversation by closing the current Gemini session and
+     * immediately initializing a new one.
+     */
     const reset = () => {
         session?.close();
         initSession();
         updateStatus("Session cleared.");
     };
 
+    /**
+     * Sends a new system instruction to the Gemini session to update its context.
+     * It instructs the model to clear its previous memory and act as a guide
+     * for the website URL provided by the scanned QR code.
+     */
+    const updateContext = async () => {
+        const contextMessage = `Please completely clear the previous context and, from now on, handle customer service regarding the content of this website: ${qrCode}`;
+
+        // Send the URL as context
+        await session?.sendClientContent({
+            turns: {
+                role: "user",
+                parts: [{ text: contextMessage }],
+            },
+            turnComplete: true,
+        });
+    };
+
+    /**
+     * A reactive effect that triggers when a new QR code is successfully scanned.
+     * It calls `updateContext` to send the new website URL to the Gemini session,
+     * effectively changing the conversation's topic. It includes a check to
+     * prevent redundant updates if the same QR code is scanned multiple times in
+     * a row.
+     */
     $effect(async () => {
-        console.log(qrCode);
-        reset();
+        if (qrCode === null || prevQrCode === qrCode) return;
+        console.log(`Update context with this QR Code: ${qrCode}`);
+        await updateContext();
+        prevQrCode = qrCode;
     });
 </script>
 

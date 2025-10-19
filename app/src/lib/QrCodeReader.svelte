@@ -48,7 +48,8 @@
      * device's rear camera. Once the video stream is active, it continuously
      * captures frames, scans them for a QR code using jsQR, and highlights any
      * detected code on an overlay canvas. When disabled, it stops the camera stream
-     * to release resources.
+     * to release resources. It also handles and reports errors, such as when
+     * camera access is denied.
      */
     const startReadingQrCode = async () => {
         /**
@@ -133,12 +134,12 @@
                         rectCtx.clearRect(0, 0, contentWidth, contentHeight);
                         // If a QR code is detected, clear the previous rectangle, draw a new
                         // one around the code's location, update the parent component's status,
-                        // log the result, and update the bindable `qr_code` property with
-                        // the decoded data.
-                        if (code) {
+                        // log the result, and update the bindable `qr_code` property with the
+                        // decoded data, ensuring the data is not empty.
+                        if (code && code.data !== "") {
                             drawRect(rectCtx, code.location);
                             updateStatus(`QR code found: ${code.data}`);
-                            console.log("QR code found", code, rectCtx);
+                            console.log(`QR code found: ${code.data}`);
                             qr_code = code.data;
                         }
 
@@ -151,7 +152,8 @@
                     scanFrame();
                 };
             } catch (e) {
-                console.error(e);
+                console.error("Error accessing camera:", e);
+                updateStatus(`Camera Error: ${e.message}`);
             }
         } else {
             // If the reader is disabled, stop all video tracks to release the camera
