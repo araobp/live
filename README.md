@@ -1,4 +1,4 @@
-# Gemini Live Showroom Web App
+# Gemini Live for Corporate Showrooms
 
 **(Work in Progress)**
 
@@ -21,13 +21,9 @@ The `app` directory contains the main application, which is being developed with
 
 <img src="docs/screenshot_qr_pixel9a.jpg" width="200">
 
-### Current Status
+### Current Implementation
 
-- Scans a QR code as an HTTPS URL and sends a system instruction to Gemini with the URL.
-
-### Next Steps
-
-- Scan a QR code as a file ID and upload the corresponding file to Gemini as a Cached Context.
+The QR code scanned by the camera will serve as the context of the conversation.
 
 ## Deployment on Raspberry Pi
 
@@ -74,3 +70,13 @@ To deploy the SvelteKit 5 application to a Raspberry Pi, follow these steps:
 -   [Web Audio API Tutorial](https://web-audio-api.firebaseapp.com/)
 -   [Creating a QR Code Reader in the Browser with jsQR (Japanese)](https://qiita.com/U_sagi/items/12cc39487a863e0136a0)
 -   [WebXR/ARCore](https://developers.google.com/ar/develop/webxr)
+
+## QR Code Generator for Chrome
+
+https://chromewebstore.google.com/detail/qr-code-generator/afpbjjgbdimpioenaedcjgkaigggcdpp
+
+## Project Gutenberg
+
+- [Johann Sebastian Bach: His Life, Art, and Work by Johann Nikolaus Forkel](https://www.gutenberg.org/files/35041/35041-pdf.pdf)
+- [AN INTRODUCTION TO ASTRONOMY](https://www.gutenberg.org/files/32000/32000-pdf.pdf)
+- [JAPANESE HOMES AND THEIR SURROUNDINGS](https://www.gutenberg.org/files/52868/52868-pdf.pdf)
