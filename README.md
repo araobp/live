@@ -74,7 +74,7 @@ To deploy the SvelteKit 5 application to a Raspberry Pi, follow these steps:
 
 ## Project Gutenberg
 
-### bach [link](https://www.gutenberg.org/ebooks/35041)
+### bach [[link](https://www.gutenberg.org/ebooks/35041)]
 
 <img src="docs/qr_codes/bach.png" width=200>
 
