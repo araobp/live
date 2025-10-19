@@ -72,7 +72,9 @@ To deploy the SvelteKit 5 application to a Raspberry Pi, follow these steps:
 -   [WebXR/ARCore](https://developers.google.com/ar/develop/webxr)
 
 
-## Project Gutenberg
+## Showroom panels
+
+(Work in progress)
 
 ### bach [[link](https://www.gutenberg.org/ebooks/35041)]
 
