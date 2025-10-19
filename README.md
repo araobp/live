@@ -1,4 +1,4 @@
-# Gemini Live Showroom Web App
+# Gemini Live for Corporate Showrooms
 
 **(Work in Progress)**
 
