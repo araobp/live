@@ -71,6 +71,10 @@ To deploy the SvelteKit 5 application to a Raspberry Pi, follow these steps:
 -   [Creating a QR Code Reader in the Browser with jsQR (Japanese)](https://qiita.com/U_sagi/items/12cc39487a863e0136a0)
 -   [WebXR/ARCore](https://developers.google.com/ar/develop/webxr)
 
+## QR Code Generator for Chrome
+
+https://chromewebstore.google.com/detail/qr-code-generator/afpbjjgbdimpioenaedcjgkaigggcdpp
+
 ## Project Gutenberg
 
 - [Johann Sebastian Bach: His Life, Art, and Work by Johann Nikolaus Forkel](https://www.gutenberg.org/files/35041/35041-pdf.pdf)
