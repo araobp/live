@@ -70,3 +70,9 @@ To deploy the SvelteKit 5 application to a Raspberry Pi, follow these steps:
 -   [Web Audio API Tutorial](https://web-audio-api.firebaseapp.com/)
 -   [Creating a QR Code Reader in the Browser with jsQR (Japanese)](https://qiita.com/U_sagi/items/12cc39487a863e0136a0)
 -   [WebXR/ARCore](https://developers.google.com/ar/develop/webxr)
+
+## Project Gutenberg
+
+- [Johann Sebastian Bach: His Life, Art, and Work by Johann Nikolaus Forkel](https://www.gutenberg.org/files/35041/35041-pdf.pdf)
+- [AN INTRODUCTION TO ASTRONOMY](https://www.gutenberg.org/files/32000/32000-pdf.pdf)
+- [JAPANESE HOMES AND THEIR SURROUNDINGS](https://www.gutenberg.org/files/52868/52868-pdf.pdf)
