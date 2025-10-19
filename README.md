@@ -21,13 +21,9 @@ The `app` directory contains the main application, which is being developed with
 
 <img src="docs/screenshot_qr_pixel9a.jpg" width="200">
 
-### Current Status
+### Current Implementation
 
-- Scans a QR code as an HTTPS URL and sends a system instruction to Gemini with the URL.
-
-### Next Steps
-
-- Scan a QR code as a file ID and upload the corresponding file to Gemini as a Cached Context.
+The QR code scanned by the camera will serve as the context of the conversation.
 
 ## Deployment on Raspberry Pi
 
