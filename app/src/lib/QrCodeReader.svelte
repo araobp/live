@@ -13,6 +13,7 @@
         enabled = false,
         qr_code = $bindable(),
         updateStatus = null,
+        captureImage = $bindable()
     } = $props();
 
     /**
@@ -167,6 +168,18 @@
                 video.srcObject = null;
             }
         }
+    };
+
+    /**
+     * Captures the current video frame, converts it to a base64-encoded JPEG image,
+     * and returns the data. This can be used for features like taking a snapshot.
+     * @returns {string} The base64-encoded JPEG image data.
+     */
+    captureImage = () => {
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        const imageURL = canvas.toDataURL("image/jpeg").split(",")[1];
+        return imageURL;
     };
 
     /**
