@@ -4,7 +4,7 @@
     import { createBlob, decode, decodeAudioData } from "$lib/utils";
     import Visual3d from "$lib/Visual3d.svelte";
     import QrCodeReader from "../lib/QrCodeReader.svelte";
-    import {gutenberg} from "$lib/scripts.ts"
+    import { gutenberg } from "$lib/scripts.ts";
 
     /**
      * Reactive state variables for managing the component's UI.
@@ -77,6 +77,8 @@
     // if the user starts speaking, all sources in this set are stopped immediately.
     let sources = new Set();
 
+    let captureImage = $state()
+    
     onMount(() => {
         // The window.AudioContext is the main entry point and container
         // for all audio operations within the Web Audio API.
@@ -126,7 +128,7 @@
     const initSession = async () => {
         // Specifies the Gemini model optimized for real-time, native audio dialogue.
         // This model is designed for fast, conversational interactions.
-        const model = "gemini-live-2.5-flash-preview"
+        const model = "gemini-live-2.5-flash-preview";
         //const model = "gemini-2.5-flash-native-audio-preview-09-2025";
         //const model = "gemini-2.5-flash-preview-native-audio-dialog";
 
@@ -237,7 +239,7 @@
                         languageCode: "en-US",
                         //                      languageCode: "ja-JP",
                     },
-//                  enableAffectiveDialog: true,
+                    //                  enableAffectiveDialog: true,
                     systemInstruction:
                         "You are a guide for a corporate showroom.",
                 },
@@ -380,13 +382,38 @@
      * It instructs the model to clear its previous memory and act as a guide
      * for the website URL provided by the scanned QR code.
      */
-    const updateContext = async script => {
+    const updateContext = async (script) => {
         const contextMessage = `In the showroom, the visitor is seeting a panel on this script: ${script}`;
         // Send the URL as context
         await session?.sendClientContent({
             turns: {
                 role: "user",
                 parts: [{ text: contextMessage }],
+            },
+            turnComplete: true,
+        });
+    };
+
+    /**
+     * Captures the current video frame from the QrCodeReader component,
+     * converts it to a base64-encoded JPEG, and sends it to the Gemini
+     * session as a multimodal input. This allows the user to send an
+     * image to the model for analysis.
+     */
+    const capture = async () => {
+        const base64ImageData = captureImage();
+        console.log(base64ImageData);
+        await session?.sendClientContent({
+            turns: {
+                role: "user",
+                parts: [
+                    {
+                        inlineData: {
+                            mimeType: "image/jpeg",
+                            data: base64ImageData,
+                        },
+                    },
+                ],
             },
             turnComplete: true,
         });
@@ -402,16 +429,35 @@
     $effect(async () => {
         if (qrCode === null || prevQrCode === qrCode) return;
         if (!(qrCode in gutenberg)) return;
-        
+
         console.log(`Update context with this QR Code: ${qrCode}`);
         await updateContext(gutenberg[qrCode]);
         prevQrCode = qrCode;
     });
-
 </script>
 
 <div style="height: 100vh; margin:0; padding:0;">
     <div class="controls">
+        <button
+            id="captureButton"
+            onclick={capture}
+            disabled={!isRecording}
+            aria-label="Capture Image"
+        >
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-image"
+                viewBox="0 0 16 16"
+            >
+                <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                <path
+                    d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1z"
+                />
+            </svg>
+        </button>
         <button
             id="resetButton"
             onclick={reset}
@@ -506,6 +552,7 @@
         {updateStatus}
         bind:qr_code={qrCode}
         z_index={10}
+        bind:captureImage={captureImage}
     ></QrCodeReader>
 </div>
 
