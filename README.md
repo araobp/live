@@ -24,7 +24,7 @@ The QR code scanned by the camera will serve as the context of the conversation.
 
 ### Sample panels
 
-=> [PANELS.md](./docs/PANELS.md)
+=> [PANELS.md](./docs/panels/PANELS.md)
 
 ## Deployment on Raspberry Pi
 
