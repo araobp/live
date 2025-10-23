@@ -14,16 +14,17 @@ The `live-audio-sveltekit5` directory contains a SvelteKit version of the offici
 
 ## Application: `app`
 
-The `app` directory contains the main application, which is being developed with the following key features:
-
--   **QR Code Reader:** Determines the user's location and provides contextual information.
--   **Augmented Reality (AR):** Provides visual guidance and interactive experiences.
+The `app` directory contains the main application.
 
 <img src="docs/screenshot_qr_pixel9a.jpg" width="200">
 
 ### Current Implementation
 
 The QR code scanned by the camera will serve as the context of the conversation.
+
+### Sample panels
+
+=> [PANELS.md](./docs/PANELS.md)
 
 ## Deployment on Raspberry Pi
 
