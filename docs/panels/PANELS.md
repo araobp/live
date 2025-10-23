@@ -1,1 +1,1 @@
-<img src="History of Astronomy.jpg" width=400>
+<img src="History of Astronomy.jpg" width=350>
