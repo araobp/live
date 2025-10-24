@@ -1,4 +1,4 @@
-# Gemini Live for museums and shorwooms
+# Gemini Live for Museums and Shorwooms
 
 <img src="docs/screenshot_pixel9a.jpg" width="200">
 
@@ -67,7 +67,7 @@ To deploy the SvelteKit 5 application to a Raspberry Pi, follow these steps:
 -   [WebXR/ARCore](https://developers.google.com/ar/develop/webxr)
 
 
-## Showroom panels
+## Sample Panels
 
 - bach [[link](https://www.gutenberg.org/ebooks/35041)]
 - astronomy [[link](https://www.gutenberg.org/ebooks/8172)]
