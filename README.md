@@ -74,6 +74,6 @@ To deploy the SvelteKit 5 application to a Raspberry Pi, follow these steps:
 - bach [[link](https://www.gutenberg.org/ebooks/35041)]
 - astronomy [[link](https://www.gutenberg.org/ebooks/8172)]
 
-<img src="docs/panels/Bach.jpg" width=400>  
+<img src="docs/panels/Bach.jpg" width=360>  
 
-<img src="docs/panels/History of Astronomy.jpg" width=400>  
+<img src="docs/panels/History of Astronomy.jpg" width=360>  
