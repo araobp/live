@@ -22,10 +22,6 @@ The `app` directory contains the main application.
 
 The QR code scanned by the camera will serve as the context of the conversation.
 
-### Sample panels
-
-=> [PANELS.md](./docs/panels/PANELS.md)
-
 ## Deployment on Raspberry Pi
 
 The application is designed to be deployed on a Raspberry Pi, which acts as a local server.
@@ -75,12 +71,9 @@ To deploy the SvelteKit 5 application to a Raspberry Pi, follow these steps:
 
 ## Showroom panels
 
-(Work in progress)
+- bach [[link](https://www.gutenberg.org/ebooks/35041)]
+- astronomy [[link](https://www.gutenberg.org/ebooks/8172)]
 
-### bach [[link](https://www.gutenberg.org/ebooks/35041)]
+<img src="docs/panels/Bach.jpg" width=400>  
 
-<img src="docs/qr_codes/bach.png" width=200>
-
-### astronomy [[link](https://www.gutenberg.org/ebooks/8172)]
-
-<img src="docs/qr_codes/astronomy.png" width=200>
+<img src="docs/panels/History of Astronomy.jpg" width=400>  
