@@ -4,7 +4,7 @@
 
 ## Introduction
 
-This project is a web application for corporate showrooms that uses the Gemini Live API to create an interactive and informative user experience. It features a QR code reader to understand the user's context and will incorporate Augmented Reality (AR) for visual guidance.
+This project is a web application for museums and corporate showrooms that uses the Gemini Live API to create an interactive and informative user experience. It features a QR code reader to understand the user's context and will incorporate Augmented Reality (AR) for visual guidance.
 
 ## Base Code: `live-audio-sveltekit5`
 
