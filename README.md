@@ -1,6 +1,4 @@
-# Gemini Live for Corporate Showrooms
-
-**(Work in Progress)**
+# Gemini Live for museums and shorwooms
 
 <img src="docs/screenshot_pixel9a.jpg" width="200">
 
