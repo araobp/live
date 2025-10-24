@@ -4,7 +4,7 @@
 
 ## Introduction
 
-This project is a web application for museums and corporate showrooms that uses the Gemini Live API to create an interactive and informative user experience. It features a QR code reader to understand the user's context and will incorporate Augmented Reality (AR) for visual guidance.
+This project is a web application for museums and corporate showrooms that uses the Gemini Live API to create an interactive and informative user experience. It features a QR code reader and image captureing to understand the user's context.
 
 ## Base Code: `live-audio-sveltekit5`
 
@@ -15,10 +15,6 @@ The `live-audio-sveltekit5` directory contains a SvelteKit version of the offici
 The `app` directory contains the main application.
 
 <img src="docs/screenshot_qr_pixel9a.jpg" width="200">
-
-### Current Implementation
-
-The QR code scanned by the camera will serve as the context of the conversation.
 
 ## Deployment on Raspberry Pi
 
@@ -60,13 +56,6 @@ To deploy the SvelteKit 5 application to a Raspberry Pi, follow these steps:
     If you are serving the application over HTTP, you need to enable the following flag in Chrome on your Android device to allow microphone access:
     `chrome://flags/#unsafely-treat-insecure-origin-as-secure`
 
-## References
-
--   [Web Audio API Tutorial](https://web-audio-api.firebaseapp.com/)
--   [Creating a QR Code Reader in the Browser with jsQR (Japanese)](https://qiita.com/U_sagi/items/12cc39487a863e0136a0)
--   [WebXR/ARCore](https://developers.google.com/ar/develop/webxr)
-
-
 ## Sample Panels
 
 - bach [[link](https://www.gutenberg.org/ebooks/35041)]
@@ -75,3 +64,10 @@ To deploy the SvelteKit 5 application to a Raspberry Pi, follow these steps:
 <img src="docs/panels/Bach.jpg" width=360>  
 
 <img src="docs/panels/History of Astronomy.jpg" width=360>  
+
+## References
+
+-   [Web Audio API Tutorial](https://web-audio-api.firebaseapp.com/)
+-   [Creating a QR Code Reader in the Browser with jsQR (Japanese)](https://qiita.com/U_sagi/items/12cc39487a863e0136a0)
+-   [WebXR/ARCore](https://developers.google.com/ar/develop/webxr)
+
