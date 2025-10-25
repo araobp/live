@@ -70,7 +70,7 @@
                 video.srcObject =
                     await navigator.mediaDevices.getUserMedia(constraints);
 
-                updateStatus("Camera access granted. Starting capture...");
+                //updateStatus("Camera access granted. Starting capture...");
 
                 /**
                  * This event handler is triggered once the video's metadata is loaded.

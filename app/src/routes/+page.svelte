@@ -77,8 +77,8 @@
     // if the user starts speaking, all sources in this set are stopped immediately.
     let sources = new Set();
 
-    let captureImage = $state()
-    
+    let captureImage = $state();
+
     onMount(() => {
         // The window.AudioContext is the main entry point and container
         // for all audio operations within the Web Audio API.
@@ -330,9 +330,9 @@
             audioWorkletNode.connect(inputAudioContext.destination);
 
             isRecording = true;
-            updateStatus("🔴 Recording... Capturing PCM chunks.");
+            updateStatus("🟠 Capturing voice...");
         } catch (err) {
-            console.error("Error starting recording:", err);
+            console.error("Error starting capturing voice:", err);
             updateStatus(`Error: ${err.message}`);
             stopRecording();
         }
@@ -341,7 +341,7 @@
     const stopRecording = () => {
         if (!isRecording && !audioStream && !inputAudioContext) return;
 
-        updateStatus("Stopping recording...");
+        updateStatus("Stopping...");
 
         isRecording = false;
 
@@ -364,7 +364,7 @@
             audioStream = null;
         }
 
-        updateStatus("Recording stopped. Click Start to begin again.");
+        updateStatus("Stopped");
     };
 
     /**
@@ -374,7 +374,7 @@
     const reset = () => {
         session?.close();
         initSession();
-        updateStatus("Session cleared.");
+        updateStatus("Session cleared");
     };
 
     /**
@@ -413,6 +413,7 @@
                             data: base64ImageData,
                         },
                     },
+                    { text: "Explaine about the image in the center" },
                 ],
             },
             turnComplete: true,
@@ -441,13 +442,13 @@
         <button
             id="captureButton"
             onclick={capture}
-            disabled={!isRecording}
+            disabled={!(isRecording && isReadingQrCode)}
             aria-label="Capture Image"
         >
             <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
+                width="36"
+                height="36"
                 fill="currentColor"
                 class="bi bi-image"
                 viewBox="0 0 16 16"
@@ -489,19 +490,16 @@
         >
             <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
+                width="36"
+                height="36"
                 fill="currentColor"
-                class="bi bi-qr-code"
+                class="bi bi-camera-video-fill"
                 viewBox="0 0 16 16"
             >
-                <path d="M2 2h2v2H2z" />
-                <path d="M6 0v6H0V0zM5 1H1v4h4zM4 12H2v2h2z" />
-                <path d="M6 10v6H0v-6zm-5 1v4h4v-4zm11-9h2v2h-2z" />
                 <path
-                    d="M10 0v6h6V0zm5 1v4h-4V1zM8 1V0h1v2H8v2H7V1zm0 5V4h1v2zM6 8V7h1V6h1v2h1V7h5v1h-4v1H7V8zm0 0v1H2V8H1v1H0V7h3v1zm10 1h-1V7h1zm-1 0h-1v2h2v-1h-1zm-4 0h2v1h-1v1h-1zm2 3v-1h-1v1h-1v1H9v1h3v-2zm0 0h3v1h-2v1h-1zm-4-1v1h1v-2H7v1z"
+                    fill-rule="evenodd"
+                    d="M0 5a2 2 0 0 1 2-2h7.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 4.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 13H2a2 2 0 0 1-2-2z"
                 />
-                <path d="M7 12h1v3h4v1H7zm9 2v2h-3v-1h2v-1z" />
             </svg>
         </button>
         <button
@@ -512,9 +510,9 @@
         >
             <svg
                 viewBox="0 0 100 100"
-                width="32px"
-                height="32px"
-                fill="#c80000"
+                width="36"
+                height="36"
+                fill="white"
                 xmlns="http://www.w3.org/2000/svg"
             >
                 <circle cx="50" cy="50" r="50" />
@@ -528,12 +526,12 @@
         >
             <svg
                 viewBox="0 0 100 100"
-                width="32px"
-                height="32px"
-                fill="#000000"
+                width="36"
+                height="36"
+                fill="orange"
                 xmlns="http://www.w3.org/2000/svg"
             >
-                <rect x="0" y="0" width="100" height="100" rx="15" />
+                <circle cx="50" cy="50" r="50" />
             </svg>
         </button>
     </div>
@@ -552,7 +550,7 @@
         {updateStatus}
         bind:qr_code={qrCode}
         z_index={10}
-        bind:captureImage={captureImage}
+        bind:captureImage
     ></QrCodeReader>
 </div>
 
@@ -592,6 +590,10 @@
         font-size: 24px;
         padding: 0;
         margin: 0;
+    }
+
+    button:active {
+        transform: scale(0.95);
     }
 
     #resetButton {
