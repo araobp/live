@@ -1,6 +1,6 @@
 # Gemini Live for Museums and Shorwooms
 
-<img src="docs/screenshot_pixel9a.jpg" width="200">
+<img src="docs/App.png" width="200">
 
 ## Introduction
 
@@ -14,7 +14,7 @@ The `live-audio-sveltekit5` directory contains a SvelteKit version of the offici
 
 The `app` directory contains the main application.
 
-<img src="docs/screenshot_qr_pixel9a.jpg" width="200">
+<img src="docs/AppQR.png" width="200">
 
 ## Deployment on Raspberry Pi
 
