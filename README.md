@@ -6,7 +6,7 @@ This project is a web application for museums and corporate showrooms that uses 
 
 ## Application
 
-The `app` directory contains the main application.
+The `app` directory contains the web application for smartphones.
 
 <img src="docs/App.png" width="200">
 
