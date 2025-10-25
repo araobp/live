@@ -6,11 +6,7 @@
 
 This project is a web application for museums and corporate showrooms that uses the Gemini Live API to create an interactive and informative user experience. It features a QR code reader and image captureing to understand the user's context.
 
-## Base Code: `live-audio-sveltekit5`
-
-The `live-audio-sveltekit5` directory contains a SvelteKit version of the official Google AI Studio "Live Audio" sample application, which was originally written in React. The Gemini CLI performed the conversion, and the code has been further modified and commented on for clarity. This codebase serves as the project's foundation.
-
-## Application: `app`
+## Application
 
 The `app` directory contains the main application.
 
@@ -66,6 +62,10 @@ To deploy the SvelteKit 5 application to a Raspberry Pi, follow these steps:
 
 - bach [[link](https://www.gutenberg.org/ebooks/35041)]
 - astronomy [[link](https://www.gutenberg.org/ebooks/8172)]
+
+## Base Code: `live-audio-sveltekit5`
+
+The `live-audio-sveltekit5` directory contains a SvelteKit version of the official Google AI Studio "Live Audio" sample application, which was originally written in React. The Gemini CLI performed the conversion, and the code has been further modified and commented on for clarity. This codebase serves as the project's foundation.
 
 ## References
 
