@@ -1,7 +1,5 @@
 # Gemini Live for Museums and Shorwooms
 
-<img src="docs/App.png" width="200">
-
 ## Introduction
 
 This project is a web application for museums and corporate showrooms that uses the Gemini Live API to create an interactive and informative user experience. It features a QR code reader and image captureing to understand the user's context.
@@ -9,6 +7,8 @@ This project is a web application for museums and corporate showrooms that uses 
 ## Application
 
 The `app` directory contains the main application.
+
+<img src="docs/App.png" width="200">
 
 <img src="docs/AppQR.png" width="200">
 
