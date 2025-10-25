@@ -10,6 +10,7 @@ The `app` directory contains the web application for smartphones.
 
 <img src="docs/App.png" width="200">
 
+
 <img src="docs/AppQR.png" width="200">
 
 ## Deployment on Raspberry Pi
