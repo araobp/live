@@ -3,8 +3,8 @@
     import { GoogleGenAI, Modality } from "@google/genai";
     import { createBlob, decode, decodeAudioData } from "$lib/utils";
     import Visual3d from "$lib/Visual3d.svelte";
-    import QrCodeReader from "../lib/QrCodeReader.svelte";
     import { gutenberg } from "$lib/scripts.ts";
+    import Camera from "../lib/Camera.svelte";
 
     /**
      * Reactive state variables for managing the component's UI.
@@ -237,7 +237,7 @@
                             prebuiltVoiceConfig: { voiceName: "Leda" },
                         },
                         languageCode: "en-US",
-                        //                      languageCode: "ja-JP",
+                        //languageCode: "ja-JP",
                     },
                     //                  enableAffectiveDialog: true,
                     systemInstruction:
@@ -545,13 +545,13 @@
         <Visual3d {inputNode} {outputNode} />
     </div>
 
-    <QrCodeReader
+    <Camera
         enabled={isReadingQrCode}
         {updateStatus}
         bind:qr_code={qrCode}
         z_index={10}
         bind:captureImage
-    ></QrCodeReader>
+    ></Camera>
 </div>
 
 <style>
