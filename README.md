@@ -72,5 +72,4 @@ The `live-audio-sveltekit5` directory contains a SvelteKit version of the offici
 
 -   [Web Audio API Tutorial](https://web-audio-api.firebaseapp.com/)
 -   [Creating a QR Code Reader in the Browser with jsQR (Japanese)](https://qiita.com/U_sagi/items/12cc39487a863e0136a0)
--   [WebXR/ARCore](https://developers.google.com/ar/develop/webxr)
-
+-   [CanvasRenderingContext2D: drawImage() method](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage)
