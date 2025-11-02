@@ -3,8 +3,36 @@
     import { GoogleGenAI, Modality } from "@google/genai";
     import { createBlob, decode, decodeAudioData } from "$lib/utils";
     import Visual3d from "$lib/Visual3d.svelte";
-    import { gutenberg } from "$lib/scripts.ts";
+    import { GUTENBERG_BOOKS } from "$lib/scripts.ts";
     import Camera from "../lib/Camera.svelte";
+
+    /**
+     * Defines the configuration for audio processing, including sample rates for
+     * input (microphone) and output (speaker), and the number of output channels.
+     * - `INPUT_SAMPLE_RATE`: 16kHz is standard for voice recognition.
+     * - `OUTPUT_SAMPLE_RATE`: 24kHz is used by the Gemini model for audio generation.
+     * - `OUTPUT_CHANNEL_COUNT`: Mono audio output.
+     */
+    const AUDIO_CONFIG = {
+        INPUT_SAMPLE_RATE: 16000,
+        OUTPUT_SAMPLE_RATE: 24000,
+        OUTPUT_CHANNEL_COUNT: 1,
+    };
+
+    /**
+     * Configuration object for the Gemini model session.
+     * - `model`: Specifies the Gemini model to use, optimized for real-time dialogue.
+     * - `voice`: The prebuilt voice for the text-to-speech output.
+     * - `languageCode`: The language for both speech recognition and synthesis.
+     * - `systemInstruction`: A prompt to define the model's persona and role.
+     */
+    const geminiConfig = {
+        model: "gemini-live-2.5-flash-preview",
+        voice: "Leda",
+        //languageCode: "ja-JP",
+        languageCode: "en-US",
+        systemInstruction: "You are a guide for a museum",
+    };
 
     /**
      * Reactive state variables for managing the component's UI.
@@ -16,6 +44,7 @@
     let isRecording = $state(false);
     let isReadingQrCode = $state(false);
     let status = $state("");
+    let isCapturing = $state(false);
     let error = $state(null);
 
     // These variables will hold the Google Gemini client instance and the active
@@ -84,7 +113,7 @@
         // for all audio operations within the Web Audio API.
         inputAudioContext = new (window.AudioContext ||
             window.webkitAudioContext)({
-            sampleRate: 16000,
+            sampleRate: AUDIO_CONFIG.INPUT_SAMPLE_RATE,
         });
         outputAudioContext = new (window.AudioContext ||
             window.webkitAudioContext)({ sampleRate: 24000 });
@@ -126,18 +155,12 @@
      * receiving audio data and managing interruptions.
      */
     const initSession = async () => {
-        // Specifies the Gemini model optimized for real-time, native audio dialogue.
-        // This model is designed for fast, conversational interactions.
-        const model = "gemini-live-2.5-flash-preview";
-        //const model = "gemini-2.5-flash-native-audio-preview-09-2025";
-        //const model = "gemini-2.5-flash-preview-native-audio-dialog";
-
         // Establish a real-time, bidirectional connection to the Gemini model,
         // setting up callbacks to handle incoming audio data, interruptions,
         // and connection status changes.
         try {
             session = await client.live.connect({
-                model: model,
+                model: geminiConfig.model,
                 callbacks: {
                     // This function is called once the connection to the model is
                     // successfully established.
@@ -172,8 +195,8 @@
                             const audioBuffer = await decodeAudioData(
                                 decode(audio.data),
                                 outputAudioContext,
-                                24000,
-                                1,
+                                AUDIO_CONFIG.OUTPUT_SAMPLE_RATE,
+                                AUDIO_CONFIG.OUTPUT_CHANNEL_COUNT,
                             );
 
                             // Create a new audio source for this chunk, assign the decoded
@@ -234,14 +257,14 @@
                     responseModalities: [Modality.AUDIO],
                     speechConfig: {
                         voiceConfig: {
-                            prebuiltVoiceConfig: { voiceName: "Leda" },
+                            prebuiltVoiceConfig: {
+                                voiceName: geminiConfig.voice,
+                            },
                         },
-                        languageCode: "en-US",
-                        //languageCode: "ja-JP",
+                        languageCode: geminiConfig.languageCode,
                     },
                     //                  enableAffectiveDialog: true,
-                    systemInstruction:
-                        "You are a guide for a corporate showroom.",
+                    systemInstruction: geminiConfig.systemInstruction,
                 },
             });
         } catch (e) {
@@ -383,7 +406,7 @@
      * for the website URL provided by the scanned QR code.
      */
     const updateContext = async (script) => {
-        const contextMessage = `In the showroom, the visitor is seeting a panel on this script: ${script}`;
+        const contextMessage = `In the showroom, the visitor is seeing a panel on the following script, explain the panel briefly: ${script}`;
         // Send the URL as context
         await session?.sendClientContent({
             turns: {
@@ -401,6 +424,11 @@
      * image to the model for analysis.
      */
     const capture = async () => {
+        isCapturing = true;
+        setTimeout(() => {
+            isCapturing = false;
+        }, 500);
+
         const base64ImageData = captureImage();
         console.log(base64ImageData);
         await session?.sendClientContent({
@@ -413,7 +441,7 @@
                             data: base64ImageData,
                         },
                     },
-                    { text: "Explaine about the image in the center" },
+                    { text: "Explain about the image in the center" },
                 ],
             },
             turnComplete: true,
@@ -429,36 +457,16 @@
      */
     $effect(async () => {
         if (qrCode === null || prevQrCode === qrCode) return;
-        if (!(qrCode in gutenberg)) return;
+        if (!(qrCode in GUTENBERG_BOOKS)) return;
 
         console.log(`Update context with this QR Code: ${qrCode}`);
-        await updateContext(gutenberg[qrCode]);
+        await updateContext(GUTENBERG_BOOKS[qrCode]);
         prevQrCode = qrCode;
     });
 </script>
 
 <div style="height: 100vh; margin:0; padding:0;">
     <div class="controls">
-        <button
-            id="captureButton"
-            onclick={capture}
-            disabled={!(isRecording && isReadingQrCode)}
-            aria-label="Capture Image"
-        >
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="36"
-                height="36"
-                fill="currentColor"
-                class="bi bi-image"
-                viewBox="0 0 16 16"
-            >
-                <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
-                <path
-                    d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1z"
-                />
-            </svg>
-        </button>
         <button
             id="resetButton"
             onclick={reset}
@@ -474,6 +482,27 @@
             >
                 <path
                     d="M480-160q-134 0-227-93t-93-227q0-134 93-227t227-93q69 0 132 28.5T720-690v-110h80v280H520v-80h168q-32-56-87.5-88T480-720q-100 0-170 70t-70 170q0 100 70 170t170 70q77 0 139-44t87-116h84q-28 106-114 173t-196 67Z"
+                />
+            </svg>
+        </button>
+        <button
+            id="captureButton"
+            onclick={capture}
+            disabled={!isReadingQrCode}
+            aria-label="Capture Image"
+            style={isCapturing ? "color: orange" : "color: white"}
+        >
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="36"
+                height="36"
+                fill="currentColor"
+                class="bi bi-image"
+                viewBox="0 0 16 16"
+            >
+                <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                <path
+                    d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1z"
                 />
             </svg>
         </button>
