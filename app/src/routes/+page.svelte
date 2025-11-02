@@ -39,6 +39,7 @@
      * - isRecording: Tracks the recording status to toggle controls.
      * - isReadingQrCode: Tracks if the camera is active for QR code scanning.
      * - status: Displays informational messages to the user.
+     * - isCapturing: Tracks if the camera is capturing an image.
      * - error: Displays error messages.
      */
     let isRecording = $state(false);
@@ -81,7 +82,7 @@
 
     /**
      * State variables for managing the QR code data.
-     * - qrCode: Holds the most recently scanned QR code data, bound from the QrCodeReader component.
+     * - qrCode: Holds the most recently scanned QR code data, bound from the Camera component.
      * - prevQrCode: Stores the previously processed QR code to prevent redundant context updates
      *   if the same code is scanned multiple times.
      */
@@ -418,7 +419,7 @@
     };
 
     /**
-     * Captures the current video frame from the QrCodeReader component,
+     * Captures the current video frame from the Camera component,
      * converts it to a base64-encoded JPEG, and sends it to the Gemini
      * session as a multimodal input. This allows the user to send an
      * image to the model for analysis.
